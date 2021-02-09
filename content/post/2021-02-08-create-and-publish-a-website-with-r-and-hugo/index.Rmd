@@ -1,0 +1,162 @@
+---
+title: Create and publish a Website with R and Hugo
+author: Sean Lee
+date: '2021-02-08'
+slug: []
+categories:
+  - R
+  - blogdown
+  - Github
+  - Hugo
+  - Netlify
+tags: ["R", "blogdown", "Hugo", "Netlify"]
+hero: /images/hero-12.jpg
+---
+
+<br><br><br>
+
+**Did you know that you can build a website in Rstudio?** blogdown is an R package that allows you to create websites from R markdown files using Hugo, an open-source static site generator written in Go and known for being incredibly fast.
+
+Before you start, I highly recommend reading the following:
+
+- [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/) by Yihui Xie and Amber Thomas
+
+- [Alison Presmanes Hill’s](https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/) post. Alison makes the excellent information very accessible.
+
+Here is the list of steps on how to create winning websites.
+
+Step 1: Create a GitHub repository<br>
+Step 2: Install blogdown and hugo<br>
+Step 3: Build a new website<br>
+Step 4: Deploy in Netlify<br>
+
+---
+
+### *Step 1: Create a GitHub repository*
+
+First, you’ll need a GitHub account which is free. After you’ve signed up, the steps for creating a new repository are down below:
+
+`1.` Click the “New” button.
+
+![](/images/post/1.png)
+
+`2.` Create new repository name and short description.
+
+![](/images/post/2.png)
+
+`3.` The URL from this repo is what we will need to set up the project in RStudio. Copy and paste by pressing the button that the red arrow points to.
+
+![](/images/post/3.png)
+
+`4.` Open RStudio. Go to File → New Project and follow the steps below to get this project setup.
+
+![](/images/post/4.png)
+
+![](/images/post/5.png)
+
+Paste the ‘Repository URL’ that we copied is the web address for our new repo.
+
+![](/images/post/6.png)
+
+---
+
+### *Step 2: Install blogdown and hugo*
+
+`1.` Install **blogdown** from your RStudio console. blogdown is available on CRAN, so we can install it using install.packages()
+
+**install.packages(“blogdown”)**
+
+`2.` Load the blogdown package.
+
+**library(blogdown)**
+
+
+`3.` Install **hugo** using the blogdown package helper function:
+
+**blogdown::install_hugo()**
+
+`4.` Update your version of Hugo (with some very verbose output).
+
+**blogdown::update_hugo()**
+
+`5.` Check the version of Hugo.
+
+**blogdown::hugo_version()**<br>
+**[1] ‘0.80.0’**
+
+---
+
+### *Step 3: Build a new website*
+
+Pick a theme. There are over 100 [Hugo themes](https://themes.gohugo.io/). Find an overview of some of the themes. Once you find what you like, follow the steps below:
+
+`1.` Click Download button. (I chose Raditian Free Hugo Theme)
+
+![](/images/post/7.png)
+
+`2.` Drag and copy the red box.
+
+![](/images/post/8.png)
+
+`3.` Write the following function in your console in RStudio.
+
+**blogdown::new_site(theme = "radity/raditian-free-hugo-theme")**
+
+`4.` **new_site()** function will create a new site and generate the following output. There are four panes in RStudio. In viewer pane, go to Files and find **config.yaml** and click. It will show up in the source pane.
+
+![](/images/post/9.png)
+
+![](/images/post/10.png)
+
+`5.` Also, open the file called **homepage.yml** from data folder. (The files and names depend on the theme, so find the files where you can add and change for your website.)
+
+![](/images/post/11.png)
+
+`6.` Start changing the info you want to add or change. To test if this new site is working, either write ```blogdown::serve_site()``` function in your console or click **Addins** in the red box on the top and choose **Serve Site**. Then, you will see the changes made in the viewer pane.
+
+![](/images/post/12.png)
+
+`7.` Let’s manage(push) changes with Git. I prefer working with Git via the command line (or the Terminal pane in RStudio).
+
+- $ git add *
+
+- $ git commit -m "whatever comments you want to leave”
+
+- $ git push
+
+`8.` Check if everything is up-to-date from the repo.
+
+![](/images/post/13.png)
+
+---
+
+### *Step 4: Deploy in Netlify*
+
+Now that all of our files are on GitHub, we need a way to convert these files into a website. [Netlify](https://www.netlify.com/) is so easy and automates the process through GitHub.
+
+`1.` Go to [Netlify](https://www.netlify.com/).
+
+`2.` Click on the **Sign Up** button and sign up using your existing GitHub account (no need to create another account).
+
+`3.` Log in, and select: **New site from Git** → **Continuous Deployment: GitHub.**
+
+`4.` After being authorized, Netlify will allow you to select from your existing GitHub repositories. You’ll pick the repo you’ve been working from with blogdown, then you’ll configure your build. This involves specifying two important things: the build command (find your HUGO_VERSION and specified hugo_0.19) and the publish directory (this should be public). Click on the **Deploy site**.
+
+![](/images/post/15.png)
+
+`5.` To change DNS (Domain Name Servers) configuration, go to **Domain settings** → **Domain management** → Click **Options** → **Edit site name.** It will show as *random_dns_name.netlify.com*
+
+---
+
+At this point, you should be up and running with **blogdown**, **GitHub**, and **Netlify**. Congratulations! Now you know how to create and publish a Website with R. Thank you for reading and following the directions.
+
+
+
+
+
+
+
+
+
+
+---
